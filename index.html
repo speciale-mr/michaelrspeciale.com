@@ -70,7 +70,7 @@
 
 
   <!-- ======================== PORTRAIT + BIO BLOCK ======================== -->
-  <div class="portrait-section">
+  <div class="portrait-section" id="about">
     <div class="portrait-container">
       <div class="portrait-image reveal">
         <img src="assets/images/portrait.jpeg" 
@@ -94,7 +94,7 @@
 
 
   <!-- ======================== ABOUT ======================== -->
-  <section id="about">
+  <section>
     <div class="container">
       <p class="label reveal">Experience</p>
 
@@ -265,8 +265,8 @@
         </div>
 
         <div class="contact-links">
-          <a href="/cdn-cgi/l/email-protection#f09d99939891959cb096919d999c8991969691998283de83848594999f" class="contact-link">
-            <span class="__cf_email__" data-cfemail="bfd2d6dcd7dedad3ffd9ded2d6d3c6ded9d9ded6cdcc91cccbcadbd6d0">[email&#160;protected]</span>
+          <a href="#" data-user="michael" data-domain="familyaffairs.studio" class="contact-link email-link">
+            <span class="email-display">michael@familyaffairs.studio</span>
             <span class="arrow">→</span>
           </a>
           <a href="https://www.linkedin.com/in/michaelrholt/" target="_blank" rel="noopener" class="contact-link">
@@ -298,7 +298,7 @@
   </footer>
 
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+  <script src="js/main.js"></script>
   <script>
     // Header background on scroll
     const header = document.querySelector('.site-header');
@@ -306,4 +306,23 @@
       header.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
-    // Auto-trigger 
+    // Auto-trigger hero animations on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal-hero, .reveal-hero-delay, .reveal-hero-delay-2').forEach(el => {
+        el.classList.add('is-visible');
+      });
+    });
+
+    // Construct email link on click (prevents Cloudflare obfuscation)
+    document.querySelectorAll('.email-link').forEach(link => {
+      const u = link.dataset.user;
+      const d = link.dataset.domain;
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'mail' + 'to:' + u + '@' + d;
+      });
+    });
+  </script>
+
+</body>
+</html>
